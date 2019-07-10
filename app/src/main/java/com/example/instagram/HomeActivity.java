@@ -3,6 +3,7 @@ package com.example.instagram;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -10,11 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.instagram.model.Post;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -25,6 +29,10 @@ public class HomeActivity extends AppCompatActivity {
     private EditText descriptionInput;
     private Button createButton;
     private Button refreshButton;
+    private ParseUser user;
+    private String createdat;
+    private String description;
+    private ParseFile image;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int RESULT_OK = -1;
     private ImageButton logoutBtn;
@@ -34,12 +42,28 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
-
         descriptionInput = findViewById(R.id.description_et);
         createButton = findViewById(R.id.create_btn);
         refreshButton = findViewById(R.id.refresh_btn);
         logoutBtn = findViewById(R.id.logoutBtn);
-
+        rvPosts = findViewById(R.id.rvPosts);
+        rvPosts.setLayoutManager(new LinearLayoutManager(this));
+        // Specify which class to query
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+// Specify the object id
+        query.getInBackground("3q2eF1EOOh", new GetCallback<Post>() {
+            public void done(Post item, ParseException e) {
+                if (e == null) {
+                    // Access data using the `get` methods for the object
+                    user=item.getUser();
+                    description=item.getDescription();
+                    image=item.getImage();
+                    Toast.makeText(HomeActivity.this, description, Toast.LENGTH_SHORT).show();
+                } else {
+                    // something went wrong
+                }
+            }
+        });
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
