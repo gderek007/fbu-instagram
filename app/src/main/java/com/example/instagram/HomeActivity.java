@@ -2,6 +2,7 @@ package com.example.instagram;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,19 +37,38 @@ public class HomeActivity extends AppCompatActivity {
     private ParseFile image;
     private ImageButton logoutBtn;
     private ImageView imageView;
-    RecyclerView rvPosts;
+    private RecyclerView rvPosts;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
+        if(ParseUser.getCurrentUser()==null){
+            Log.e("Is there a user?","No");
+            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else{Log.e("Is there a user?","yes");}
 
+        swipeContainer = findViewById(R.id.swipeContainer);
         descriptionInput = findViewById(R.id.description_et);
         createButton = findViewById(R.id.create_btn);
         refreshButton = findViewById(R.id.refresh_btn);
         logoutBtn = findViewById(R.id.logoutBtn);
         rvPosts = findViewById(R.id.rvPosts);
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                loadTopPosts();
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright);
         // Specify which class to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         // Specify the object id
@@ -86,7 +106,8 @@ public class HomeActivity extends AppCompatActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-               ParseUser.logOut();
+                Log.e("Logout","Logging out of account.");
+                ParseUser.logOut();
                 Intent intent = new Intent(HomeActivity.this,MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -146,6 +167,7 @@ public class HomeActivity extends AppCompatActivity {
                         Log.d("HomeActivity", "Post[" + i + "] = "
                                 + objects.get(i).getDescription() + "\nusername = "
                                 + objects.get(i).getUser());
+                        swipeContainer.setRefreshing(false);
                     }
                 } else {
                     e.printStackTrace();

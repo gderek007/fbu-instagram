@@ -31,8 +31,23 @@ public class SignUp extends MainActivity{
             @Override
             public void onClick(View v) {
                 user.setEmail(email.getText().toString());
+                user.put("handle",",my_handle");
                 user.setUsername(username.getText().toString());
                 user.setPassword(password.getText().toString());
+////                try {
+//                    user.signUpInBackground(new SignUpCallback() {
+//                        @Override
+//                        public void done(ParseException e) {
+//                            Log.e("Sign Up","You made an account!");
+//                            SignUp.this.done(user,e);
+//                        }
+//                    });
+//                    user.signUp();
+//                    Log.e("Sign Up","You made an account!");
+//                    SignUp.this.done(user,e);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
                 user.signUpInBackground(new SignUpCallback() {
                     public void done(ParseException e) {
                         if (e == null) {
