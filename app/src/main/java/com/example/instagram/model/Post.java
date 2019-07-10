@@ -31,6 +31,9 @@ public class Post extends ParseObject {
     public ParseUser getUser(){
         return getParseUser(KEY_USER);
     }
+    public String getcreatedAt(){
+        return getParseUser(KEY_USER).getCreatedAt().toString();
+    }
     public void setUser(ParseUser user){
         put(KEY_USER,user);
     }

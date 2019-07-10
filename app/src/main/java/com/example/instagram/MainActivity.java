@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
             final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
+            return;
         }
         usernameInput = findViewById(R.id.usernameInput);
         passwordInput = findViewById(R.id.passwordInput);
