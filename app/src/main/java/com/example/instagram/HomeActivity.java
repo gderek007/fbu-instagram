@@ -25,7 +25,8 @@ import com.parse.SaveCallback;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-    private static final String imagepath = "/sdcard/DCIM/Camera";
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int RESULT_OK = -1;
     private EditText descriptionInput;
     private Button createButton;
     private Button refreshButton;
@@ -33,15 +34,15 @@ public class HomeActivity extends AppCompatActivity {
     private String createdat;
     private String description;
     private ParseFile image;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int RESULT_OK = -1;
     private ImageButton logoutBtn;
     private ImageView imageView;
     RecyclerView rvPosts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
+
         descriptionInput = findViewById(R.id.description_et);
         createButton = findViewById(R.id.create_btn);
         refreshButton = findViewById(R.id.refresh_btn);
@@ -50,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
         // Specify which class to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-// Specify the object id
+        // Specify the object id
         query.getInBackground("3q2eF1EOOh", new GetCallback<Post>() {
             public void done(Post item, ParseException e) {
                 if (e == null) {
@@ -64,23 +65,17 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO be able to take a picture and post
 //                final String description = descriptionInput.getText().toString();
 //                final ParseUser user = ParseUser.getCurrentUser();
-//
-//                final File file = new File(imagepath);
-//                final ParseFile parseFile = new ParseFile(file);
-////                createPost(description,parseFile,user);
-//                Intent intent = new Intent(HomeActivity.this,Posting.class);
-//                startActivity(intent);
-//                finish();
            // dispatchTakePictureIntent();
-
-
             }
         });
+
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +97,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+
     //TODO Camera
 //    private void dispatchTakePictureIntent() {
 //        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -118,12 +114,12 @@ public class HomeActivity extends AppCompatActivity {
 //            imageView.setImageBitmap(imageBitmap);
 //        }
 //    }
+//TODO go through my posts and connect it to my recycler view, Posts are currently working so its an adapter issue
     private void createPost(String description, ParseFile imageFile, ParseUser user){
         final Post newPost = new Post();
         newPost.setDescriptions(description);
         newPost.setImage(imageFile);
         newPost.setUser(user);
-
         newPost.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -146,15 +142,15 @@ public class HomeActivity extends AppCompatActivity {
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
                     for (int i = 0; i < objects.size(); i++) {
+
                         Log.d("HomeActivity", "Post[" + i + "] = "
                                 + objects.get(i).getDescription() + "\nusername = "
-                                + objects.get(i).getUser().getUsername());
+                                + objects.get(i).getUser());
                     }
                 } else {
                     e.printStackTrace();
                 }
             }
-
         });
     }
 }

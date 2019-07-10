@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         loginBtn= findViewById(R.id.loginBtn);
         signupBtn= findViewById(R.id.signupBtn);
 
+        //Login button needed to access the app
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -34,11 +35,9 @@ public class MainActivity extends AppCompatActivity {
                 final String password = passwordInput.getText().toString();
 
                 login (username,password);
-
-
-
         }
         });
+        //Signup allows the user to create an account if a valid email and username are provided
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        //TODO Staying logged in is a required feature
 //        ParseUser.logInInBackground(username, password, new LogInCallback() {
 //            public void done(ParseUser user, ParseException e) {
 //                if (user != null) {
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
     }
+    //login function that allows for the user to log in through Parse
     private void login(String username, String password){
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
