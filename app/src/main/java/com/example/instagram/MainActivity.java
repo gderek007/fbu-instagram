@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_main);
 
         } else {
-            Log.e("User status", "Going to Home");
+            Log.e("User status", "Going to Home Activity");
             final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("LoginBtn", "Login button working");
                 final String username = usernameInput.getText().toString();
                 final String password = passwordInput.getText().toString();
-
                 login(username, password);
             }
         });
@@ -57,17 +57,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-        //TODO Staying logged in is a required feature
-//        ParseUser.logInInBackground(ParseUser.getCurrentUser(), ParseUser., new LogInCallback() {
-//            public void done(ParseUser user, ParseException e) {
-//                if (user != null) {
-//                    // Hooray! The user is logged in.
-//                } else {
-//                    // Signup failed. Look at the ParseException to see what happened.
-//                    setContentView();
-//                }
-//            }
-//        });
 
     //login function that allows for the user to log in through Parse
     private void login(String username, String password){

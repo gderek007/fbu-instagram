@@ -136,6 +136,7 @@ public class HomeActivity extends AppCompatActivity {
 //        }
 //    }
 //TODO go through my posts and connect it to my recycler view, Posts are currently working so its an adapter issue
+
     private void createPost(String description, ParseFile imageFile, ParseUser user){
         final Post newPost = new Post();
         newPost.setDescriptions(description);
@@ -167,8 +168,9 @@ public class HomeActivity extends AppCompatActivity {
                         Log.d("HomeActivity", "Post[" + i + "] = "
                                 + objects.get(i).getDescription() + "\nusername = "
                                 + objects.get(i).getUser());
-                        swipeContainer.setRefreshing(false);
+
                     }
+                    swipeContainer.setRefreshing(false);
                 } else {
                     e.printStackTrace();
                 }

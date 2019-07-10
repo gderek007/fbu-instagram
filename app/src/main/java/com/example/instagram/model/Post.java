@@ -16,6 +16,9 @@ public class Post extends ParseObject {
     public String getDescription(){
         return getString(KEY_DESCRIPTION);
     }
+//    public String getStringUser(){
+//        return getString();
+//    }
     public void setDescriptions(String description){
         put(KEY_DESCRIPTION,description);
     }
