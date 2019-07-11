@@ -22,17 +22,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/User"
         tools:srcCompat="@tools:sample/avatars" />
+
     <TextView
         android:id="@+id/descriptionInput"
         android:layout_width="354dp"
         android:layout_height="0dp"
         android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="72dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Content" />
 
@@ -57,4 +58,44 @@
         android:layout_marginRight="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/likeBtn"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/Content"
+        app:layout_constraintTop_toBottomOf="@+id/Content"
+        app:srcCompat="@drawable/ufi_heart" />
+
+    <ImageButton
+        android:id="@+id/commentBtn"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/likeBtn"
+        app:layout_constraintTop_toBottomOf="@+id/Content"
+        app:srcCompat="@drawable/ufi_comment" />
+
+    <ImageButton
+        android:id="@+id/dmBtn"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/commentBtn"
+        app:layout_constraintTop_toBottomOf="@+id/Content"
+        app:srcCompat="@drawable/ufi_new_direct" />
+
+    <ImageButton
+        android:id="@+id/bookmarkBtn"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/Content"
+        app:layout_constraintTop_toBottomOf="@+id/Content"
+        app:srcCompat="@drawable/ufi_save" />
 </android.support.constraint.ConstraintLayout>
