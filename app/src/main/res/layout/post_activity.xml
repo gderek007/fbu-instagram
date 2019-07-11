@@ -32,6 +32,7 @@
 
     <ImageView
         android:id="@+id/ivPreview"
+        android:clickable="true"
         android:layout_width="333dp"
         android:layout_height="628dp"
         android:layout_marginStart="8dp"

@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.RecyclerView
+            android:clickable="true"
             android:id="@+id/rvPosts"
             android:layout_width="395dp"
             android:layout_height="604dp"

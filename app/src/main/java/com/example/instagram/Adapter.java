@@ -1,16 +1,20 @@
 package com.example.instagram;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.instagram.model.Post;
 import com.parse.ParseUser;
+
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.List;
 
@@ -36,34 +40,50 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
     public void onBindViewHolder( ViewHolder holder, int position) {
         // get the data according to position
         Post post = mPosts.get(position);
+        PrettyTime time = new PrettyTime();
         //System.out.println(tweet);
         //populate the views according to this data
         final ParseUser user=post.getUser();
         holder.User.setText(user.getUsername());
         holder.Description.setText(post.getDescription());
-        holder.CreatedAt.setText(post.getcreatedAt());
+        holder.CreatedAt.setText(time.format(post.getcreatedAt()).toString());
+
         //holder.created.setText(getRelativeTimeAgo(tweet.createdAt));
         Glide.with(context).load(post.getImage().getUrl()).into(holder.Content);
+
     }
     @Override
     public int getItemCount() {
         return mPosts.size();
     }
 
-    // creat ViewHolder class
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    // create ViewHolder class
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView Content;
         public TextView User;
         public TextView Description;
         public TextView CreatedAt;
+        public Button detailsBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
+
             // perform findViewById lookups
             Content = (ImageView) itemView.findViewById(R.id.Content);
             User = (TextView) itemView.findViewById(R.id.User);
             Description = (TextView) itemView.findViewById(R.id.description_et);
             CreatedAt = (TextView) itemView.findViewById(R.id.CreatedAt);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            Post post = mPosts.get(position);
+            Intent intent = new Intent(context, DetailsActivity.class);
+            intent.putExtra("User",post);
+            context.startActivity(intent);
         }
     }
     public void clear() {

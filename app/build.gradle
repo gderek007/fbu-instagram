@@ -20,7 +20,9 @@ android {
 }
 
 dependencies {
-
+    compile 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+    implementation 'org.parceler:parceler-api:1.1.12'
+    annotationProcessor 'org.parceler:parceler:1.1.12'
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'

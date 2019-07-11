@@ -25,6 +25,8 @@
             android:name=".SignUp"></activity>
         <activity
         android:name=".Posting"></activity>
+        <activity
+            android:name=".DetailsActivity"></activity>
 
         <activity android:name=".MainActivity">
             <intent-filter>

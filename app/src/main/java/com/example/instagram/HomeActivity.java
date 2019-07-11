@@ -33,6 +33,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class HomeActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int RESULT_OK = -1;
@@ -132,6 +133,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         loadTopPosts();
+
     }
     public void onLaunchCamera() {
         // create Intent to take a picture and return control to the calling application
