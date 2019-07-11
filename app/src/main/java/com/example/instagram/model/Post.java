@@ -6,6 +6,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
 import java.util.Date;
 
 @ParseClassName("Post")
@@ -33,8 +35,14 @@ public class Post extends ParseObject {
     public ParseUser getUser(){
         return getParseUser(KEY_USER);
     }
-    public Date getcreatedAt(){
-        return getParseUser(KEY_USER).getCreatedAt();
+//    public Date getcreatedAt(){
+//        return getParseUser(KEY_USER).getCreatedAt();
+//    }
+    public String RelativeTime(){
+        Date date = getParseUser(KEY_USER).getCreatedAt();
+        PrettyTime time = new PrettyTime();
+        return time.format(date).toString();
+
     }
     public void setUser(ParseUser user){
         put(KEY_USER,user);

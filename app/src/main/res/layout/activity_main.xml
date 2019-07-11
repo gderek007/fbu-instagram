@@ -4,9 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFC0CB"
     tools:context=".MainActivity">
 
     <Button
+
+    android:textColor="#ffffff"
+    android:background="#32CD32"
         android:id="@+id/signupBtn"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
@@ -16,7 +20,33 @@
         android:text="Sign Up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        style="?android:attr/borderlessButtonStyle"/>
+        style="?android:attr/borderlessButtonStyle"
+        android:bottomRightRadius="7dp" android:bottomLeftRadius="7dp"
+        android:topLeftRadius="7dp" android:topRightRadius="7dp"
+     />
+    <Button
+
+        android:radius="7dp"
+        android:id="@+id/loginBtn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginLeft="96dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="128dp"
+        android:textColor="#ffffff"
+        android:background="#008080"
+        android:text="Login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/signupBtn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:bottomRightRadius="7dp" android:bottomLeftRadius="7dp"
+        android:topLeftRadius="7dp" android:topRightRadius="7dp"
+        />
+
 
     <EditText
         android:id="@+id/usernameInput"
@@ -35,21 +65,6 @@
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/loginBtn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginLeft="96dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="128dp"
-        android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/signupBtn"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/passwordInput"

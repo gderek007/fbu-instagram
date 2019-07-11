@@ -25,7 +25,7 @@ public class DetailsActivity extends AppCompatActivity {
         User = findViewById(R.id.User);
         CreatedAt = findViewById(R.id.CreatedAt);
         User.setText(post.getUser().getUsername());
-        CreatedAt.setText(post.getcreatedAt().toString());
+        CreatedAt.setText(post.RelativeTime());
         description_et.setText(post.getDescription());
         Glide.with(this).load(post.getImage().getUrl()).into(Content);
     }

@@ -46,7 +46,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         final ParseUser user=post.getUser();
         holder.User.setText(user.getUsername());
         holder.Description.setText(post.getDescription());
-        holder.CreatedAt.setText(time.format(post.getcreatedAt()).toString());
+        holder.CreatedAt.setText(post.RelativeTime());
 
         //holder.created.setText(getRelativeTimeAgo(tweet.createdAt));
         Glide.with(context).load(post.getImage().getUrl()).into(holder.Content);

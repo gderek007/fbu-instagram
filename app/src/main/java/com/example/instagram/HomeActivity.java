@@ -221,7 +221,7 @@ public class HomeActivity extends AppCompatActivity {
                     //brute force method to get top 20 posts
                     if(objects.size()>20)
                     {
-                        for (int i = objects.size()-19; i < objects.size(); i++) {
+                        for (int i = objects.size()-20; i < objects.size(); i++) {
                             posts.add(0,objects.get(i));
                             rvPosts.scrollToPosition(0);
                             Log.d("HomeActivity", "Post[" + i + "] = "
