@@ -12,11 +12,9 @@ import com.bumptech.glide.Glide;
 import com.example.instagram.model.Post;
 import com.parse.ParseUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
-    public ArrayList<String> banned;
     private List<Post> mPosts;
     Context context;
     // pass in the tweets array in the constructor

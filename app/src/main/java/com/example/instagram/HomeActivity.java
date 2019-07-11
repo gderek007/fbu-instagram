@@ -57,6 +57,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        user=ParseUser.getCurrentUser();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
         if(ParseUser.getCurrentUser()==null){
@@ -109,6 +110,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 onLaunchCamera();
                 createPost(descriptionInput.getText().toString(),new ParseFile(photoFile),user);
+                loadTopPosts();
 
             }
         });
@@ -219,9 +221,12 @@ public class HomeActivity extends AppCompatActivity {
         postsQuery.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> objects, ParseException e) {
+                adapter.clear();
                 if (e == null) {
                     for (int i = 0; i < objects.size(); i++) {
-
+                        posts.add(0,objects.get(i));
+//                        adapter.notifyItemInserted(0);
+                        rvPosts.scrollToPosition(0);
                         Log.d("HomeActivity", "Post[" + i + "] = "
                                 + objects.get(i).getDescription() + "\nusername = "
                                 + objects.get(i).getUser().getUsername());
