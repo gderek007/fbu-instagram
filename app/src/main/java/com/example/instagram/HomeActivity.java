@@ -30,6 +30,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
@@ -39,13 +40,15 @@ public class HomeActivity extends AppCompatActivity {
     private Button createButton;
     private Button refreshButton;
     private ParseUser user;
-    private String createdat;
+    private String CreatedAt;
     private String description;
     private ParseFile image;
     private ImageButton logoutBtn;
     private ImageView imageView;
     private ImageView ivPreview;
     private RecyclerView rvPosts;
+    Adapter adapter;
+    ArrayList<Post> posts;
     private SwipeRefreshLayout swipeContainer;
     public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
@@ -71,6 +74,9 @@ public class HomeActivity extends AppCompatActivity {
         logoutBtn = findViewById(R.id.logoutBtn);
         rvPosts = findViewById(R.id.rvPosts);
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
+        posts = new ArrayList<>();
+        adapter = new Adapter(posts);
+        rvPosts.setAdapter(adapter);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -126,8 +132,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         });
-
-
+        loadTopPosts();
     }
 
     //TODO Camera
@@ -222,8 +227,7 @@ public class HomeActivity extends AppCompatActivity {
 
                         Log.d("HomeActivity", "Post[" + i + "] = "
                                 + objects.get(i).getDescription() + "\nusername = "
-                                + objects.get(i).getUser());
-
+                                + objects.get(i).getUser().getUsername());
                     }
                     swipeContainer.setRefreshing(false);
                 } else {

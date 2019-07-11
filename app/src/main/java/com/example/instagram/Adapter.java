@@ -43,6 +43,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         final ParseUser user=post.getUser();
         holder.User.setText(user.getUsername());
         holder.Description.setText(post.getDescription());
+        holder.CreatedAt.setText(post.getcreatedAt());
         //holder.created.setText(getRelativeTimeAgo(tweet.createdAt));
         Glide.with(context).load(post.getImage().getUrl()).into(holder.Content);
 
@@ -57,6 +58,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         public ImageView Content;
         public TextView User;
         public TextView Description;
+        public TextView CreatedAt;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -64,6 +66,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
             Content = (ImageView) itemView.findViewById(R.id.Content);
             User = (TextView) itemView.findViewById(R.id.User);
             Description = (TextView) itemView.findViewById(R.id.Description);
+            CreatedAt = (TextView) itemView.findViewById(R.id.CreatedAt);
         }
     }
     public void clear() {
