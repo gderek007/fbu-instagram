@@ -111,7 +111,6 @@ public class HomeActivity extends AppCompatActivity {
                 onLaunchCamera();
                 createPost(descriptionInput.getText().toString(),new ParseFile(photoFile),user);
                 loadTopPosts();
-
             }
         });
 
@@ -134,7 +133,6 @@ public class HomeActivity extends AppCompatActivity {
         });
         loadTopPosts();
     }
-
     public void onLaunchCamera() {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -193,9 +191,6 @@ public class HomeActivity extends AppCompatActivity {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
-
-//TODO go through my posts and connect it to my recycler view, Posts are currently working so its an adapter issue
-
     private void createPost(String description,ParseFile imageFile, ParseUser user){
         final Post newPost = new Post();
         newPost.setDescriptions(description);
@@ -212,24 +207,35 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
-
     private void loadTopPosts() {
         final Post.Query postsQuery = new Post.Query();
-        postsQuery.getTop().withUser();
+        postsQuery.getRecent().withUser();
         postsQuery.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> objects, ParseException e) {
                 adapter.clear();
                 if (e == null) {
-                    for (int i = 0; i < objects.size(); i++) {
-                        posts.add(0,objects.get(i));
-//                        adapter.notifyItemInserted(0);
-                        rvPosts.scrollToPosition(0);
-                        Log.d("HomeActivity", "Post[" + i + "] = "
-                                + objects.get(i).getDescription() + "\nusername = "
-                                + objects.get(i).getUser().getUsername());
+                    //brute force method to get top 20 posts
+                    if(objects.size()>20)
+                    {
+                        for (int i = objects.size()-19; i < objects.size(); i++) {
+                            posts.add(0,objects.get(i));
+                            rvPosts.scrollToPosition(0);
+                            Log.d("HomeActivity", "Post[" + i + "] = "
+                                    + objects.get(i).getDescription() + "\nusername = "
+                                    + objects.get(i).getUser().getUsername());
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < objects.size(); i++) {
+                            posts.add(0,objects.get(i));
+                            rvPosts.scrollToPosition(0);
+                            Log.d("HomeActivity", "Post[" + i + "] = "
+                                    + objects.get(i).getDescription() + "\nusername = "
+                                    + objects.get(i).getUser().getUsername());
+                        }
                     }
                     swipeContainer.setRefreshing(false);
                 } else {

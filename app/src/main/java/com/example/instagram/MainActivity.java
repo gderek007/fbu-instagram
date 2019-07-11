@@ -53,10 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SignUp.class);
                 startActivity(intent);
                 finish();
-
             }
         });
-
     }
 
     //login function that allows for the user to log in through Parse

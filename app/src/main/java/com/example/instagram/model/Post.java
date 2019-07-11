@@ -12,6 +12,7 @@ public class Post extends ParseObject {
     private static final String KEY_DESCRIPTION= "description";
     private static final String KEY_IMAGE= "image";
     private static final String KEY_USER= "user";
+    private static final String KEY_CREATED= "createdAt";
 
     public String getDescription(){
         return getString(KEY_DESCRIPTION);
@@ -46,6 +47,13 @@ public class Post extends ParseObject {
         }
         public Query withUser(){
             include("user");
+            return this;
+        }
+
+        public Query getRecent(){
+            getQuery(KEY_CREATED);
+
+
             return this;
         }
     }
