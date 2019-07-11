@@ -90,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
         // Specify which class to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         // Specify the object id
-        query.getInBackground("3q2eF1EOOh", new GetCallback<Post>() {
+        query.getInBackground(ParseUser.getCurrentUser().getObjectId(), new GetCallback<Post>() {
             public void done(Post item, ParseException e) {
                 if (e == null) {
                     // Access data using the `get` methods for the object
@@ -107,8 +107,8 @@ public class HomeActivity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO be able to take a picture and post
                 onLaunchCamera();
+                createPost(descriptionInput.getText().toString(),new ParseFile(photoFile),user);
 
             }
         });
@@ -129,13 +129,10 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-
-
         });
         loadTopPosts();
     }
 
-    //TODO Camera
     public void onLaunchCamera() {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -197,7 +194,7 @@ public class HomeActivity extends AppCompatActivity {
 
 //TODO go through my posts and connect it to my recycler view, Posts are currently working so its an adapter issue
 
-    private void createPost(String description, ParseFile imageFile, ParseUser user){
+    private void createPost(String description,ParseFile imageFile, ParseUser user){
         final Post newPost = new Post();
         newPost.setDescriptions(description);
         newPost.setImage(imageFile);

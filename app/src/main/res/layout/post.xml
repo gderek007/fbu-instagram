@@ -22,7 +22,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/Description"
+        android:id="@+id/description_et"
         android:layout_width="354dp"
         android:layout_height="89dp"
         android:layout_marginStart="28dp"
