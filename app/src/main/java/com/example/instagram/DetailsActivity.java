@@ -21,7 +21,7 @@ public class DetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Post post = (intent.getParcelableExtra("User"));
         Content = findViewById(R.id.Content);
-        description_et = findViewById(R.id.description_et);
+        description_et = findViewById(R.id.descriptionInput);
         User = findViewById(R.id.User);
         CreatedAt = findViewById(R.id.CreatedAt);
         User.setText(post.getUser().getUsername());

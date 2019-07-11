@@ -47,8 +47,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         holder.User.setText(user.getUsername());
         holder.Description.setText(post.getDescription());
         holder.CreatedAt.setText(post.RelativeTime());
-
-        //holder.created.setText(getRelativeTimeAgo(tweet.createdAt));
         Glide.with(context).load(post.getImage().getUrl()).into(holder.Content);
 
     }
@@ -71,7 +69,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
             // perform findViewById lookups
             Content = (ImageView) itemView.findViewById(R.id.Content);
             User = (TextView) itemView.findViewById(R.id.User);
-            Description = (TextView) itemView.findViewById(R.id.description_et);
+            Description = (TextView) itemView.findViewById(R.id.descriptionInput);
             CreatedAt = (TextView) itemView.findViewById(R.id.CreatedAt);
 
             itemView.setOnClickListener(this);

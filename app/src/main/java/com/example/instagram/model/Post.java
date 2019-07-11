@@ -35,9 +35,6 @@ public class Post extends ParseObject {
     public ParseUser getUser(){
         return getParseUser(KEY_USER);
     }
-//    public Date getcreatedAt(){
-//        return getParseUser(KEY_USER).getCreatedAt();
-//    }
     public String RelativeTime(){
         Date date = getParseUser(KEY_USER).getCreatedAt();
         PrettyTime time = new PrettyTime();
@@ -63,8 +60,6 @@ public class Post extends ParseObject {
 
         public Query getRecent(){
             getQuery(KEY_CREATED);
-
-
             return this;
         }
     }
